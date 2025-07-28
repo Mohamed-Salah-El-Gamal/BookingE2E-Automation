@@ -9,16 +9,9 @@ public class DataProvider {
             FileInputStream fis = new FileInputStream("src\\test\\TestData\\Booking TestData - Copy.xlsx");
             XSSFWorkbook workbook = new XSSFWorkbook(fis);
             XSSFSheet sheet = workbook.getSheet("TestData");
-
-//       int sheets = workbook.getNumberOfSheets();
-//       for (int i=0;i<sheets;i++){
-//           if(workbook.getSheetName(i).equalsIgnoreCase("TestData")){
-//               XSSFSheet sheet=workbook.getSheetAt(i);
-//           }
-//       }
-        String checkIn = sheet.getRow(1).getCell(0).getStringCellValue();
-        String checkOut = sheet.getRow(1).getCell(1).getStringCellValue();
-        String location = sheet.getRow(1).getCell(2).getStringCellValue();
+            String checkIn = sheet.getRow(1).getCell(0).getStringCellValue();
+            String checkOut = sheet.getRow(1).getCell(1).getStringCellValue();
+            String location = sheet.getRow(1).getCell(2).getStringCellValue();
 
         workbook.close();
         fis.close();
