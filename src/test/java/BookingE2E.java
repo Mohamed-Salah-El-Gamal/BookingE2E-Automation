@@ -40,7 +40,7 @@ public class BookingE2E {
         driver.findElement(By.xpath("//button[@aria-label='Next month']")).click();
         driver.findElement(By.xpath("//span[@aria-label='" + checkInDate + "']")).click();//For check-in date selection
         driver.findElement(By.xpath("//span[@aria-label='" + checkOutDate + "']")).click();//For check-out date selection
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@type='submit']")));
         driver.findElement(By.xpath("//button[@type='submit']")).click();
 
