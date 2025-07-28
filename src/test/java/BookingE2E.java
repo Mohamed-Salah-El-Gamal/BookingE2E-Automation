@@ -40,6 +40,7 @@ public class BookingE2E {
         driver.findElement(By.xpath("//button[@aria-label='Next month']")).click();
         driver.findElement(By.xpath("//span[@aria-label='" + checkInDate + "']")).click();//For check-in date selection
         driver.findElement(By.xpath("//span[@aria-label='" + checkOutDate + "']")).click();//For check-out date selection
+        Thread.sleep(1000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@type='submit']")));
         driver.findElement(By.xpath("//button[@type='submit']")).click();
 
@@ -54,13 +55,11 @@ public class BookingE2E {
                 WebElement hotelLink = driver.findElement(By.xpath("//div[@data-testid='availability-cta']/a[contains(@href,'royal-tulip-alexandria')]"));
                 System.out.println("Hotel found!");
                 hotelLink.click();
-//                Thread.sleep(10000);
                 hotelFound = true;
                 break;
             } catch (NoSuchElementException e) {
                 // If hotel is not found, scroll down
                 js.executeScript("window.scrollBy(0, document.body.scrollHeight);");
-//                Thread.sleep(3000);
 
                 try {
                     // Click "Load more results" if visible
@@ -68,7 +67,6 @@ public class BookingE2E {
 
                     if (loadMoreBtn.isDisplayed() && loadMoreBtn.isEnabled()) {
                         loadMoreBtn.click();
-//                        Thread.sleep(5000); // Wait for new results to load
                     }
                 } catch (NoSuchElementException ex) {
                     // No load more button means possibly end of results
@@ -86,7 +84,6 @@ public class BookingE2E {
                 driver.switchTo().window(windowHandle);
                 break;
             }
-//            Thread.sleep(10000);
         }
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@value='2' and @name='bedPreference_78883120']")));
         WebElement bedOption = driver.findElement(By.xpath("//input[@value='2' and @name='bedPreference_78883120']"));
@@ -96,7 +93,6 @@ public class BookingE2E {
         bedOption.click();
         driver.findElement(By.name("nr_rooms_78883120_386871369_0_33_0_131741")).sendKeys("1");
         driver.findElement(By.xpath("//span[@class='bui-button__text js-reservation-button__text']")).click();
-//        Thread.sleep(20000);
 
     }
     @Test(priority = 1)
@@ -108,13 +104,11 @@ public class BookingE2E {
         System.out.println("Actual check-in: " + actualCheckIn);
         Assert.assertEquals(actualCheckIn, expectedCheckIn, "Check-in date does not match!");
         String expectedCheckOut = "Check-out\nTue, Oct 14, 2025\nUntil 12:00 PM";
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//time[@datetime='Tue, Oct 14, 2025']")));
         WebElement checkOutElement = driver.findElement(By.xpath("//time[@datetime='Tue, Oct 14, 2025']"));
         String actualCheckOut = checkOutElement.getText().trim();
         System.out.println("Actual Check-out:\n" + actualCheckOut);
         Assert.assertEquals(actualCheckOut, expectedCheckOut, "Check-out does not match");
         String expectedHotelName = "Tolip Hotel Alexandria";
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1[class='e7addce19e']")));
         WebElement HotelName = driver.findElement(By.cssSelector("h1[class='e7addce19e']"));
         String actualHotelName = HotelName.getText().trim();
         System.out.println("Actual Hotel Name: " + actualHotelName);
